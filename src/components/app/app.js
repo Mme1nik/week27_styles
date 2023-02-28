@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import Card from '../cards/card';
 
@@ -13,16 +14,17 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
+    const [index, setIndex] = useState(0);
     const data =  [
-        {price: 300, rate: 10, active: false, backHeader: '#43acba', back: '#0ccee8', id: 1},
-        {price: 450, rate: 50, active: false, backHeader: '#43ba7b', back: '#2ef27d', id: 2},
-        {price: 550, rate: 100, active: true, backHeader: '#ba4367', back: '#f22e69', id: 3},
-        {price: 1000, rate: 200, active: false, backHeader: '#212121', back: '#4d4f4e', id: 4}
+        {price: 300, rate: 10, backHeader: '#43acba', back: '#0ccee8', id: 1},
+        {price: 450, rate: 50, backHeader: '#43ba7b', back: '#2ef27d', id: 2},
+        {price: 550, rate: 100, backHeader: '#ba4367', back: '#f22e69', id: 3},
+        {price: 1000, rate: 200, backHeader: '#212121', back: '#4d4f4e', id: 4}
     ];
     const elements = data.map(item => {
         const {id, ...itemProps} = item;
         return (
-            <Card key = {id} {...itemProps}/>
+            <Card key = {id} {...itemProps} id={id} setIndex={setIndex} active = {item.id === index ? true : false}/>
         )
     });
     

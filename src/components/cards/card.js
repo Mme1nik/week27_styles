@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 
 const Container = styled.div`  
@@ -52,23 +54,31 @@ const Volume = styled.div`
     background-color: #e3dede;
 `;
 
-const Card = ({price, rate, backHeader, back, active}) => {
+const Card = (props) =>  {
 
-const Wrapper = styled.div`
+    const {price, rate, backHeader, back, id, active} = props;
+
+    const onActive = () => {
+        props.setIndex(id);
+        console.log(id);
+    }
+
+    const Wrapper = styled.div`
     height: 100%;
     transform: ${active ? 'scale(1.04)' : 'auto'};
     box-shadow: ${active ? '5px 5px 15px 5px grey' : 'auto'};
-`;
-const AddContainer = styled(Container)`
-    background-color: ${back};
-`;
-
-const AddHead = styled(Head)`
-    background-color: ${backHeader};
-`;
+    cursor: pointer;
+    `;
+    const AddContainer = styled(Container)`
+        background-color: ${back};
+    `;
+    
+    const AddHead = styled(Head)`
+        background-color: ${backHeader};
+    `;
 
     return (
-        <Wrapper>
+        <Wrapper onClick={onActive}>
             <AddHead>
                 <Header>Безлимитный {price}</Header>
             </AddHead>
@@ -82,6 +92,7 @@ const AddHead = styled(Head)`
             <Volume>Объем включенного трафика не ограничен</Volume>
         </Wrapper>
     )
+
 }
 
 export default Card;
